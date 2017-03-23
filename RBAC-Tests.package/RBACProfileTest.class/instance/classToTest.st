@@ -1,0 +1,3 @@
+configuration
+classToTest
+	self shouldBeImplemented.

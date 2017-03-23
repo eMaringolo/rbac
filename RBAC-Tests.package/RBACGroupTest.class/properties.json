@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACGroupTest",
+	"pools" : [
+		 ],
+	"super" : "RBACProfileTest",
+	"type" : "normal" }

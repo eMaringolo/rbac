@@ -1,0 +1,18 @@
+{
+	"category" : "RBAC-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"users",
+		"simpleRoles",
+		"groups",
+		"compositeRoles",
+		"operations" ],
+	"name" : "RBACTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

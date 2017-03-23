@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACAbstractRoleTest",
+	"pools" : [
+		 ],
+	"super" : "RBACTest",
+	"type" : "normal" }

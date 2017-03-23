@@ -1,0 +1,17 @@
+{
+	"category" : "RBAC-Tests",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"inferiorEntity",
+		"inferiorEntity2",
+		"superiorEntity",
+		"middleEntity" ],
+	"name" : "RBACProfileTest",
+	"pools" : [
+		 ],
+	"super" : "RBACTest",
+	"type" : "normal" }

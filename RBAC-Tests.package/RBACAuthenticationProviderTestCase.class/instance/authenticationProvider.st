@@ -1,0 +1,4 @@
+uncategorized
+authenticationProvider
+
+	^RBACAuthenticationProvider dummy
