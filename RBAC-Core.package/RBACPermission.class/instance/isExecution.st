@@ -1,0 +1,4 @@
+testing
+isExecution
+
+	^self hasOperation

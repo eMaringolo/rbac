@@ -1,0 +1,4 @@
+uncategorized
+isValidationActionClass
+	
+	^true

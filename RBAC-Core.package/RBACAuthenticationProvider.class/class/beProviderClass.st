@@ -1,0 +1,4 @@
+uncategorized
+beProviderClass
+
+	self authenticationProviderClass: self

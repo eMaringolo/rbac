@@ -1,0 +1,4 @@
+uncategorized
+defaultAuthenticationProviderClass
+
+	^RBACDummyAuthenticationProvider 

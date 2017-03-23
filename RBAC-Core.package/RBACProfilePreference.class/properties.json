@@ -1,0 +1,17 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "EstebanMaringolo 3/22/2017 22:30",
+	"instvars" : [
+		"owner",
+		"section",
+		"name",
+		"value" ],
+	"name" : "RBACProfilePreference",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

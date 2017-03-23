@@ -1,0 +1,1 @@
+I'm an abstract superclas representing anything that has a name and a description.

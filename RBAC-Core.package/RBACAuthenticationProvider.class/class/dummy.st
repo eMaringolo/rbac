@@ -1,0 +1,3 @@
+accessing
+dummy
+	^RBACDummyAuthenticationProvider new

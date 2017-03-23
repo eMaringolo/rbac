@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACSessionException",
+	"pools" : [
+		 ],
+	"super" : "RBACException",
+	"type" : "normal" }

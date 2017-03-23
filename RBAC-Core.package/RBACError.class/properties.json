@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACError",
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }

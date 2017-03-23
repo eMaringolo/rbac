@@ -1,0 +1,1 @@
+I represent the abstract for user authentication by means of username and password, my subclasses should specify the behaviour specific for each authentication mechanism.

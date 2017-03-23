@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACRoleRecursion",
+	"pools" : [
+		 ],
+	"super" : "RBACRoleError",
+	"type" : "normal" }

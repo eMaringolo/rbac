@@ -1,0 +1,14 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "RBACUpdateDenied",
+	"pools" : [
+		 ],
+	"super" : "RBACActionDenied",
+	"type" : "normal" }

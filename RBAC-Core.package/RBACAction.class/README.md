@@ -1,0 +1,1 @@
+I represent an action that can be granted or denied to a profile

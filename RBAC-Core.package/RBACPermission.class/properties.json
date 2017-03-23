@@ -1,0 +1,16 @@
+{
+	"category" : "RBAC-Core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "EstebanMaringolo 3/13/2017 16:21",
+	"instvars" : [
+		"target",
+		"bits",
+		"role" ],
+	"name" : "RBACPermission",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

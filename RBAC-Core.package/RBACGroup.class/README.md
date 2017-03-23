@@ -1,0 +1,1 @@
+I represent a group  in the framework, I can contain users and have different roles.

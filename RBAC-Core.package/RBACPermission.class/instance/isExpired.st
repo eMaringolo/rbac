@@ -1,0 +1,3 @@
+testing
+isExpired
+	^ false
