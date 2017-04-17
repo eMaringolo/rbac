@@ -12,5 +12,5 @@
 	"name" : "RBACPermission",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "GRObject",
 	"type" : "normal" }

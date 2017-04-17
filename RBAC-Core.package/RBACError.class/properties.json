@@ -10,5 +10,5 @@
 	"name" : "RBACError",
 	"pools" : [
 		 ],
-	"super" : "Error",
+	"super" : "GRError",
 	"type" : "normal" }

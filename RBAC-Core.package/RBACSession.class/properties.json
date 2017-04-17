@@ -3,8 +3,7 @@
 	"classinstvars" : [
 		 ],
 	"classvars" : [
-		"Current",
-		"Parameters" ],
+		"Current" ],
 	"commentStamp" : "EstebanMaringolo 3/22/2017 22:27",
 	"instvars" : [
 		"user",
@@ -13,5 +12,5 @@
 	"name" : "RBACSession",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "GRObject",
 	"type" : "normal" }

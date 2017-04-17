@@ -11,5 +11,5 @@
 	"name" : "RBACNamedModel",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "GRObject",
 	"type" : "normal" }
