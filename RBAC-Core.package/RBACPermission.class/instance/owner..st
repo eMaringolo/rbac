@@ -1,4 +1,4 @@
 accessing
 owner: anObject 
 
-	self target: anObject
+	self role: anObject
