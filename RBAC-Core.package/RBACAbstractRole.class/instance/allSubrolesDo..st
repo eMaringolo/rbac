@@ -1,3 +1,0 @@
-uncategorized
-allSubrolesDo: aBlock
-	self subclassResponsibility

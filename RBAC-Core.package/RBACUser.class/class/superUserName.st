@@ -1,3 +1,0 @@
-uncategorized
-superUserName
-	^ 'admin'

@@ -1,4 +1,0 @@
-uncategorized
-preparePassword: passwordString
-	
-	^passwordString

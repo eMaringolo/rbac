@@ -1,1 +1,0 @@
-I'm a dynamic variable that can be used to implement process context  binding of the session.

@@ -1,4 +1,0 @@
-uncategorized
-isValidationActionClass
-	
-	^true

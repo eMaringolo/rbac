@@ -1,1 +1,0 @@
-I'm a transient permission, used internally for permission lookup and queries. I should not be stored anywhere.

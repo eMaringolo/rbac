@@ -1,3 +1,0 @@
-uncategorized
-reset
-	Current := nil

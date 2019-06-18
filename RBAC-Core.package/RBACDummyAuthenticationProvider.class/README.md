@@ -1,1 +1,0 @@
-I'm a Dummy authentication provider, anything you request I'll grant.

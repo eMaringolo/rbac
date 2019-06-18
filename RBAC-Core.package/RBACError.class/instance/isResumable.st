@@ -1,3 +1,0 @@
-uncategorized
-isResumable
-	^ true

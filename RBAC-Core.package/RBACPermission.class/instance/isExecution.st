@@ -1,4 +1,0 @@
-testing
-isExecution
-
-	^self hasOperation

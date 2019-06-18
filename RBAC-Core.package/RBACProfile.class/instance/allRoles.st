@@ -1,3 +1,0 @@
-roles
-allRoles
-	^ self roles
