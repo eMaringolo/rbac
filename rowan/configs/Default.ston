@@ -1,0 +1,11 @@
+RwProjectCompoundConfiguration {
+	#name : 'RBAC',
+	#comment : 'Project automatically created via SETT import',
+	#projectName : 'RBAC',
+	#version : '0.1.0',
+	#packageNames : [
+		'RBAC-Seaside',
+		'RBAC-Glorp',
+		'RBAC-Core'
+	]
+}

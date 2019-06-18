@@ -1,0 +1,25 @@
+RwSimpleProjectSpecification {
+	#specName : 'RBAC',
+	#version : '0.2.0',
+	#platformSpec : {
+		'gemstone' : RwGemStoneSpecification {
+			#defaultSymbolDictName : 'SETTSymbolDict',
+			#defaultUseSessionMethodsForExtensions : false,
+			#packageNameToPlatformPropertiesMap : { }
+		}
+	},
+	#configsPath : 'rowan/configs',
+	#specsPath : 'rowan/specs',
+	#repoSpec : RwGitRepositorySpecification {
+		#committish : 'fromStore',
+		#committishType : 'branch'
+	},
+	#repoPath : 'rowan/sources',
+	#comment : 'This project was automatically created from a Store publish.',
+	#defaultConfigurationNames : [
+		'Default'
+	],
+	#defaultGroupNames : [
+		'default'
+	]
+}
