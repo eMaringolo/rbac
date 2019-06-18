@@ -39,7 +39,7 @@ RBACNamedModel >> description: aString [
 { #category : 'private' }
 RBACNamedModel >> initializeRandomName [
 	name := (self class name copyFrom: 5 to: self class name size)
-		, ((Grease.GRPlatform current  newRandom next) * 1000000) truncated printString
+		, ((GRPlatform current  newRandom next) * 1000000) truncated printString
 ]
 
 { #category : 'accessing' }

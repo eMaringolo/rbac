@@ -37,7 +37,7 @@ RBACGlorpAuthenticationProvider >> preparePassword: passwordString [
 { #category : 'passwords' }
 RBACGlorpAuthenticationProvider >> preparePassword: passwordString salt: saltString [
 
-	^Base64FastCoder encodeAsBase64String: (Grease.GRPlatform current secureHashFor: (passwordString, saltString))
+	^Base64FastCoder encodeAsBase64String: (GRPlatform current secureHashFor: (passwordString, saltString))
 ]
 
 { #category : 'authentication' }

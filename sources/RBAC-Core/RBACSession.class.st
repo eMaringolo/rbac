@@ -43,7 +43,7 @@ RBACSession class >> for: aRBACUser [
 	
 	^self new
 		user: aRBACUser;
-		creationTime: Smalltalk.Grease.DateAndTime now;
+		creationTime: DateAndTime now;
 		yourself
 ]
 
@@ -67,7 +67,7 @@ RBACSession >> creationTime: aDateAndTime [
 { #category : 'accessing' }
 RBACSession >> initializeProperties [
 
-	^properties := Grease.GRSmallDictionary new
+	^properties := GRSmallDictionary new
 ]
 
 { #category : 'accessing' }

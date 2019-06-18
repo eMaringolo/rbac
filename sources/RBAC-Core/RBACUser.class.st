@@ -131,7 +131,7 @@ RBACUser >> email: aString [
 { #category : 'private' }
 RBACUser >> generateNewSalt [
 
-	self passwordSalt: (Grease.GRPlatform current newRandom nextInt: SmallInteger maxVal * (10 raisedTo: 100)) asString
+	self passwordSalt: (GRPlatform current newRandom nextInt: SmallInteger maxVal * (10 raisedTo: 100)) asString
 ]
 
 { #category : 'accessing' }
