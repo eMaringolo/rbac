@@ -18,18 +18,17 @@ So for a Permission of Creation and Read, but not deletion, the bits would be 2r
 
 "
 Class {
-	#name : 'RBACPermission',
-	#superclass : 'RBACObject',
+	#name : #RBACPermission,
+	#superclass : #RBACObject,
 	#instVars : [
 		'target',
 		'bits',
 		'role'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACPermission class >> from: anRBACPermission [
 
 	^(self new)
@@ -38,7 +37,7 @@ RBACPermission class >> from: anRBACPermission [
 		setBits: anRBACPermission bits
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACPermission class >> role: aRBACRole target: anObject [ 
 
 	^self new
@@ -47,136 +46,136 @@ RBACPermission class >> role: aRBACRole target: anObject [
 		yourself
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACPermission class >> target: anObject [
 	^ self new
 		target: anObject;
 		yourself
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 RBACPermission >> allowAll [
 
 	bits := 2r11111111
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsCreation [
 
 	^(bits bitAnd: 1) ~= 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsCreation: aBoolean [
 	bits := bits bitAt: 1 put: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsDeletion [
 
 	^(bits bitAnd: 2r1000) ~= 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsDeletion: aBoolean [
 	bits := bits bitAt: 4 put: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsExecution [
 	^(bits bitAnd: 2r10000) ~= 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsExecution: aBoolean [
 	bits := bits bitAt: 5 put: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsRead [
 	^ (bits bitAnd: 2r10) ~= 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsRead: aBoolean [
 	bits := bits bitAt: 2 put: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsUpdate [
 	^ (bits bitAnd: 2r100) ~= 0
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> allowsUpdate: aBoolean [
 	bits := bits bitAt: 3 put: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 RBACPermission >> asTransient [
 	"Answer the receiver as a transient instance."
 	
 	^RBACTransientPermission from: self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> bits [
 
 	^bits
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACPermission >> bits: anInteger [
 
 	bits := anInteger
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canCreate [
 	^ self canCreate: target
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canCreate: class [
 	^ self allowsCreation and: [ self notExpired ]
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canDelete [
 	^ self canDelete: target
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canDelete: class [
 	^ self allowsDeletion and: [ self notExpired ]
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canRead [
 	^ self canRead: target
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canRead: class [
 	^ self allowsRead and: [ self notExpired ]
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canUpdate [
 	^ self canUpdate: target
 ]
 
-{ #category : 'querying' }
+{ #category : #querying }
 RBACPermission >> canUpdate: class [
 	^ self allowsUpdate and: [ self notExpired ]
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 RBACPermission >> denyAll [
 	bits := 0
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACPermission >> initialize [
 	"Private - Initializes receiver."
 	
@@ -185,62 +184,62 @@ RBACPermission >> initialize [
 	self denyAll
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> isCRUD [
 	^ self isExecution not
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> isDenyAll [
 	
 	^self bits = 0
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> isExecution [
 
 	^self target isOperation
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> isExpired [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> isTransient [
 	
 	^false
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 RBACPermission >> mergeFrom: aRBACPermission [ 
 	bits := self bits bitOr: aRBACPermission bits
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACPermission >> notExpired [
 	
 	^true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> owner [
 	^ self role
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> owner: anObject [ 
 
 	self role: anObject
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 RBACPermission >> permissionOr: permission [
 	^ self asTransient setBits: (self bits bitOr: permission bits)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 RBACPermission >> printOn: aStream [
 	"Prints the receiver on aStream."
 
@@ -271,29 +270,29 @@ RBACPermission >> printOn: aStream [
 		nextPut: $}
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 RBACPermission >> role [
 
 	^role
 ]
 
-{ #category : 'convenience' }
+{ #category : #convenience }
 RBACPermission >> role: newRole [
 	role := newRole
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACPermission >> setBits: integerBits [
 	bits := integerBits
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> target [
 
 	^target
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACPermission >> target: anObject [ 
 
 	target := anObject

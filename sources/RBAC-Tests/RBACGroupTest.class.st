@@ -1,24 +1,20 @@
-"
-
-"
 Class {
-	#name : 'RBACGroupTest',
-	#superclass : 'RBACProfileTest',
-	#vw_namespace : 'Root',
+	#name : #RBACGroupTest,
+	#superclass : #RBACProfileTest,
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACGroupTest >> classToTest [
 	^ RBACGroup
 ]
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACGroupTest >> sampleGroup [
 	^ self groups first
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACGroupTest >> testAdditionRemotionAndInclusionOfMembers [
 	"Test addMember: , removeAllMembers , removeMember: and includesMember: methods."
 
@@ -42,7 +38,7 @@ RBACGroupTest >> testAdditionRemotionAndInclusionOfMembers [
 	self deny: (self sampleGroup includesMember: (self users at: 3))
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACGroupTest >> testEquals [
 
 	"Test the equals: method."
@@ -64,7 +60,7 @@ RBACGroupTest >> testEquals [
 	self deny: self sampleGroup = (self users at: 2)
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACGroupTest >> testMembers [
 	self sampleGroup members: (Set with: (self users at: 1) with: (self users at: 2) with: (self users at: 3)).
 	self

@@ -5,16 +5,15 @@ As a composite I know how to walk through my subroles to lookup permissions.
 I have to admit I'm convoluted and in practice I'm not used much and instead profiles like users and groups are assigned different non-composite roles to achieve the same behavior.
 "
 Class {
-	#name : 'RBACCompositeRole',
-	#superclass : 'RBACAbstractRole',
+	#name : #RBACCompositeRole,
+	#superclass : #RBACAbstractRole,
 	#instVars : [
 		'subroles'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> addRole: aRBACRole [
 	"Adds aRBACRole to the receiver subroles."
 	
@@ -22,7 +21,7 @@ RBACCompositeRole >> addRole: aRBACRole [
 	self subroles add: aRBACRole
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> allSubrolesDo: aBlock [
 	self subroles
 		do: [ :each | 
@@ -30,7 +29,7 @@ RBACCompositeRole >> allSubrolesDo: aBlock [
 			each allSubrolesDo: aBlock ]
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACCompositeRole >> canExecute: target [
 	self
 		allSubrolesDo: [ :each | 
@@ -39,7 +38,7 @@ RBACCompositeRole >> canExecute: target [
 	^false
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> containsRole: aRole [ 
 
 	aRole = self ifTrue: [^true].
@@ -47,19 +46,19 @@ RBACCompositeRole >> containsRole: aRole [
 	^false
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACCompositeRole >> initializeSubroles [
 	subroles := Set new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACCompositeRole >> isComposite [
 	 "Answer whether receiver is composite."
 	
 	^true
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACCompositeRole >> permissionFor: anObject [ 
 	"Answer the CRUD permission of the receiver for anObject."
 
@@ -73,7 +72,7 @@ RBACCompositeRole >> permissionFor: anObject [
 		into: [:answer :perm | answer permissionOr: perm]
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACCompositeRole >> permissions [
 	"Answer the CRUD permissions of the receiver."
 	
@@ -83,21 +82,21 @@ RBACCompositeRole >> permissions [
 	^crudPermissions asOrderedCollection
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> removeAllSubroles [
 	"Removes all the subroles of receiver."
 	
 	self subroles removeAll
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> removeRole: aRole [
 	"Remove aRole from the receiver."
 	
 	^self subroles remove: aRole
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> subroles [
 	"Answer the value of the receiver's ''subroles'' instance variable."
 
@@ -105,14 +104,14 @@ RBACCompositeRole >> subroles [
 	^subroles
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> subroles: aCollection [ 
 	"Private - Set the value of the receiver's ''subroles'' instance variable to the argument, aCollection."
 
 	subroles := aCollection
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACCompositeRole >> validateRoleAddition: role [ 
 	"Adds role to the receiver list of subroles."
 

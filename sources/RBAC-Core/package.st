@@ -1,1 +1,1 @@
-Package { #name : 'RBAC-Core' }
+Package { #name : #'RBAC-Core' }

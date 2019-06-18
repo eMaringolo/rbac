@@ -2,13 +2,12 @@
 I represent the Read action
 "
 Class {
-	#name : 'RBACRead',
-	#superclass : 'RBACAction',
-	#vw_namespace : 'Root',
+	#name : #RBACRead,
+	#superclass : #RBACAction,
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACRead >> canBeDoneBy: aRBACUser [
 	"Answer true if the receiver can be done by aRBACUser."
 

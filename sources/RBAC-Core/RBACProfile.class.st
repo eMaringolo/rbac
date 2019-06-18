@@ -2,100 +2,99 @@
 I'm the abstract class representing profiles in the framework.
 "
 Class {
-	#name : 'RBACProfile',
-	#superclass : 'RBACNamedModel',
+	#name : #RBACProfile,
+	#superclass : #RBACNamedModel,
 	#instVars : [
 		'roles',
 		'preferences',
 		'inheritPreferences'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACProfile class >> isAbstract [
 	"Answer whether the receiver is an Abstract class."
 	
 	^self == RBACProfile
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> addRole: aRole [
 	
 	self roles add: aRole.
 	aRole addProfile: self.
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACProfile >> addToRole: aRBACRole [ 
 
 	aRBACRole addProfile: self
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> allRoles [
 	^ self roles
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> canAdd: aRole [
 	"Answer whether aRole can be added to receiver."
 	
 	^self hasRole: aRole
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> canCreate: anObject [
 	"Answer whether receiver can create anObject."
 	
 	^(self permissionFor: anObject) canCreate
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> canDelete: anObject [
 	"Answer whether receiver can delete anObject."
 	
 	^(self permissionFor: anObject) canDelete
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> canExecute: target [
 	^ self roles anySatisfy: [ :one | one canExecute: target ]
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> canRead: anObject [
 	"Answer whether receiver can read anObject."
 	
 	^(self permissionFor: anObject) canRead
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> canUpdate: anObject [
 	"Answer whether receiver can update anObject."
 	
 	^(self permissionFor: anObject) canUpdate
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> description [
 	"Answer the value of the receiver's ''description'' instance variable."
 
 	^description
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> description: aString [
 	description := aString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> groups [
 	^ OrderedCollection new
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> hasRole: aRole [
 	self roles
 		do: [ :each | 
@@ -104,88 +103,88 @@ RBACProfile >> hasRole: aRole [
 	^ false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> inheritPreferences [
 	^ inheritPreferences
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> inheritPreferences: aBoolean [
 	inheritPreferences := aBoolean
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACProfile >> initialize [
 	super initialize.
 	inheritPreferences := false
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACProfile >> initializePreferences [
 	preferences := OrderedCollection new
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACProfile >> initializeRoles [
 	"Private - Initializes the roles of receiver."
 
 	roles := Set new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> isAdmin [
 
 	^self name = self class superUserName
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> isGroup [
 
 	^false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> isUser [
 
 	^false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> members [
 	^ OrderedCollection with: self
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> onAddedToRole: anRBACRole [
 
 	self roles add: anRBACRole
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> onRemovedFromRole: aRBACRole [ 
 	self roles remove: aRBACRole ifAbsent: [  ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> ownOrInheritedPreferences [
 	self inheritPreferences
 		ifTrue: [ ^ self groups flatCollect: [ :each | each ownOrInheritedPreferences ] ].
 	^ self preferences
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> ownPreferenceAt: sectionName named: preferenceName [
 	^ self preferences
 		detect: [ :one | one section = sectionName and: [ one name = preferenceName ] ]
 		ifNone: [ nil ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACProfile >> ownPreferenceValueAt: sectionName named: preferenceName [
 	^ (self ownPreferenceAt: sectionName named: preferenceName) ifNotNil: [ :p | p value ]
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACProfile >> permissionFor: anObject [
 	| permissions |
 	permissions := OrderedCollection new.
@@ -193,7 +192,7 @@ RBACProfile >> permissionFor: anObject [
 	^ permissions inject: (RBACTransientPermission target: anObject) into: [ :answer :perm | answer mergeFrom: perm ]
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferenceAt: sectionName named: preferenceName [ 
 	"Answer the preference named preferenceName located in the 
 	section named sectionName."
@@ -202,24 +201,24 @@ RBACProfile >> preferenceAt: sectionName named: preferenceName [
 		ifNone: [nil]
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferenceClass [
 	^ self class preferenceClass
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferenceValueAt: sectionName named: preferenceName [
 	^ (self preferenceAt: sectionName named: preferenceName) ifNotNil: [ :p | p value ]
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferenceValueAt: sectionName named: preferenceName ifAbsent: aBlock [
 	^ (self preferenceAt: sectionName named: preferenceName)
 		ifNil: aBlock
 		ifNotNil: [ :p | p value ]
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferenceValueAt: sectionName named: preferenceName put: newValue [
 
 	^((self preferenceAt: sectionName named: preferenceName)
@@ -231,7 +230,7 @@ RBACProfile >> preferenceValueAt: sectionName named: preferenceName put: newValu
 			value: newValue
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> preferences [
 	"Answer the value of the receiver's ''preferences'' instance variable."
 
@@ -239,14 +238,14 @@ RBACProfile >> preferences [
 	^preferences
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> preferences: anObject [
 	"Set the value of the receiver's ''preferences'' instance variable to the argument, anObject."
 
 	preferences := anObject
 ]
 
-{ #category : 'preferences' }
+{ #category : #preferences }
 RBACProfile >> preferencesAt: sectionName [
 	| dict |
 	dict := Dictionary new.
@@ -257,22 +256,22 @@ RBACProfile >> preferencesAt: sectionName [
 	^ dict
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> profilePreferenceClass [
 	^ RBACProfilePreference
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACProfile >> profileType [
 	"No op for Glorp filtered hierarchy"
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACProfile >> profileType: aString [
 	"No op for Glorp filtered hierarchy"
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> removeAllRoles [
 	self roles copy
 		do: [ :each | 
@@ -280,29 +279,29 @@ RBACProfile >> removeAllRoles [
 			each removeProfile: self ]
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> removeRole: aRole [
 	self roles remove: aRole.
 	aRole onRemovedFromProfile: self
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> removeRole: aRole ifAbsent: exceptionBlock [
 	^ self roles remove: aRole ifAbsent: exceptionBlock
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> roles [
 	roles ifNil: [ self initializeRoles ].
 	^ roles
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACProfile >> roles: aCollection [
 	roles := aCollection
 ]
 
-{ #category : 'roles' }
+{ #category : #roles }
 RBACProfile >> validateRoleAddition: aRole [
 	(self canAdd: aRole)
 		ifTrue: [ RBACRoleAlreadyAssigned signalWith: aRole ]

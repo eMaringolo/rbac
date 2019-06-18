@@ -1,9 +1,6 @@
-"
-
-"
 Class {
-	#name : 'RBACTest',
-	#superclass : 'TestCase',
+	#name : #RBACTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'users',
 		'simpleRoles',
@@ -11,60 +8,59 @@ Class {
 		'compositeRoles',
 		'operations'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACTest class >> isAbstract [
 
 	^self name = #RBACTest
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACTest >> compositeRoles [
 	compositeRoles ifNil: [ self initializeCompositeRoles ].
 	^ compositeRoles
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACTest >> groups [
 	groups ifNil: [ self initializeRBACGroups ].
 	^ groups
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> initializeCompositeRoles [
 	compositeRoles := (1 to: 5) collect: [ :each | RBACCompositeRole new ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> initializeOperations [
 	^ operations := (1 to: 5) collect: [ :i | RBACOperation new ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> initializeRBACGroups [
 	groups := (1 to: 4) collect: [:each | RBACGroup new]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> initializeSimpleRoles [
 	simpleRoles := (1 to: 5) collect: [ :each | RBACRole new ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> initializeUsers [
 	users := (1 to: 4) collect: [ :each | RBACUser new ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACTest >> operations [
 	operations ifNil: [ self initializeOperations ].
 	^ operations
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 RBACTest >> setupProfile [
 	"Private - Test the addition of roles to the user."
 
@@ -92,13 +88,13 @@ RBACTest >> setupProfile [
 		addPermission: sysop
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACTest >> simpleRoles [
 	simpleRoles ifNil: [ self initializeSimpleRoles ].
 	^ simpleRoles
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACTest >> users [
 	users ifNil: [ self initializeUsers ].
 	^ users

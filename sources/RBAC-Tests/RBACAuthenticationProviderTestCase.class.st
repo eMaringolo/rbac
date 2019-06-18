@@ -1,20 +1,16 @@
-"
-
-"
 Class {
-	#name : 'RBACAuthenticationProviderTestCase',
-	#superclass : 'RBACTest',
-	#vw_namespace : 'Root',
+	#name : #RBACAuthenticationProviderTestCase,
+	#superclass : #RBACTest,
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAuthenticationProviderTestCase >> authenticationProvider [
 
 	^RBACAuthenticationProvider dummy
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAuthenticationProviderTestCase >> testDummyAuthentication [
 	self
 		assert:
@@ -23,7 +19,7 @@ RBACAuthenticationProviderTestCase >> testDummyAuthentication [
 				password: 'baz')
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAuthenticationProviderTestCase >> testReturnACorrectRBACSession [
 	self assert: (RBACAuthenticationProvider new sessionFor: RBACUser new) class = RBACSession.
 	self

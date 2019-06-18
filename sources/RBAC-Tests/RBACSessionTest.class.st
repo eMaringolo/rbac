@@ -1,14 +1,10 @@
-"
-
-"
 Class {
-	#name : 'RBACSessionTest',
-	#superclass : 'RBACTest',
-	#vw_namespace : 'Root',
+	#name : #RBACSessionTest,
+	#superclass : #RBACTest,
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACSessionTest class >> _comment [
 
 
@@ -26,7 +22,7 @@ RBACSessionTest class >> _comment [
 	Para saber cuales serÌan los mÈtodos a refactorizar, ver los looseMethods de clases de RBAC en el package Basic Oil Objects-Tests."
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACSessionTest >> testRequestGranting [
 	| session profile role |
 	profile := RBACUser new.
@@ -48,7 +44,7 @@ RBACSessionTest >> testRequestGranting [
 					(session request: (RBACDeletion of: #DeniedModel) ifGranted: [ true ] ifDenied: [ false ]) ]
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACSessionTest >> testRequestRefusal [
 	| session menu |
 	session := RBACSession for: (self users at: 1).

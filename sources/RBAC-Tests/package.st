@@ -1,1 +1,1 @@
-Package { #name : 'RBAC-Tests' }
+Package { #name : #'RBAC-Tests' }

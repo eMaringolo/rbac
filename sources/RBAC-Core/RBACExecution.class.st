@@ -2,13 +2,12 @@
 I represent the Exection action
 "
 Class {
-	#name : 'RBACExecution',
-	#superclass : 'RBACAction',
-	#vw_namespace : 'Root',
+	#name : #RBACExecution,
+	#superclass : #RBACAction,
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACExecution >> canBeDoneBy: aRBACUser [
 	^ aRBACUser canExecute: self role
 ]

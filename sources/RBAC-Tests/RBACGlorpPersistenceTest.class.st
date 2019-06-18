@@ -1,20 +1,15 @@
-"
-
-"
 Class {
-	#name : 'RBACGlorpPersistenceTest',
-	#superclass : 'TestCase',
+	#name : #RBACGlorpPersistenceTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'login',
 		'session',
 		'databaseFilename'
 	],
-	#originalCategory : 'RBAC-Glorp',
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> createDatabaseSchema [
 
 	| classes |
@@ -30,19 +25,19 @@ RBACGlorpPersistenceTest >> createDatabaseSchema [
 		do: [:each | session accessor executeSQLStringNoResult: each]
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> databaseFilename [
 
 	^databaseFilename ifNil: [databaseFilename := 'RBACTest', Timestamp now compressedDateTimeString, '.sqlite']
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> ensureDatabaseDeletion [
 
 	(Filename named: self databaseFilename) deleteIfPossible
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> setUp [
 
 	self ensureDatabaseDeletion.
@@ -55,14 +50,14 @@ RBACGlorpPersistenceTest >> setUp [
 	self createDatabaseSchema.
 ]
 
-{ #category : 'initialize-release' }
+{ #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> tearDown [
 
 	session logout.
 	self ensureDatabaseDeletion
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 RBACGlorpPersistenceTest >> testAuthenticationProvider [
 
 	| provider |
@@ -77,7 +72,7 @@ RBACGlorpPersistenceTest >> testAuthenticationProvider [
 	self assert: (provider authenticateUsername: 'JohnDoe' password: 'foobar').
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 RBACGlorpPersistenceTest >> testBasicGraphPersistence [
 
 

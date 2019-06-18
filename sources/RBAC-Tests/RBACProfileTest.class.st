@@ -1,42 +1,38 @@
-"
-
-"
 Class {
-	#name : 'RBACProfileTest',
-	#superclass : 'RBACTest',
+	#name : #RBACProfileTest,
+	#superclass : #RBACTest,
 	#instVars : [
 		'inferiorEntity',
 		'inferiorEntity2',
 		'superiorEntity',
 		'middleEntity'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACProfileTest class >> isAbstract [
 	^ self name = #RBACProfileTest
 ]
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACProfileTest >> classToTest [
 	self shouldBeImplemented.
 ]
 
-{ #category : 'instantiation' }
+{ #category : #instantiation }
 RBACProfileTest >> profile1 [
 
 	^self classToTest new
 ]
 
-{ #category : 'instantiation' }
+{ #category : #instantiation }
 RBACProfileTest >> profile2 [
 
 	^self classToTest new
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACProfileTest >> testHasRole [
 
 	| samProfile |
@@ -59,7 +55,7 @@ RBACProfileTest >> testHasRole [
 	self assert: (samProfile hasRole: (self simpleRoles at: 5))
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACProfileTest >> testPermissions [
 	"Test the addition of roles to the user."
 
@@ -93,41 +89,41 @@ RBACProfileTest >> testPermissions [
 	self assert: (profile canRead: target2)
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACProfileTest >> testRemoveRoleIfAbsent [
 
-	| samProfile temp |
-	samProfile := self profile1.
-	samProfile roles: (Set with: (self simpleRoles at: 1) with: (self compositeRoles at: 1)).
+	| rbacProfile temp |
+	rbacProfile := self profile1.
+	rbacProfile roles: (Set with: (self simpleRoles at: 1) with: (self compositeRoles at: 1)).
 	self
-		should: [ samProfile removeRole: (self simpleRoles at: 3) ifAbsent: [ NotFound signalFor: (self simpleRoles at: 3) ] ]
+		should: [ rbacProfile removeRole: (self simpleRoles at: 3) ifAbsent: [ NotFound signalFor: (self simpleRoles at: 3) ] ]
 		raise: NotFound.
-	self shouldnt: [ samProfile removeRole: (self simpleRoles at: 2) ifAbsent: [ temp := 3 ] ] raise: NotFound.
+	self shouldnt: [ rbacProfile removeRole: (self simpleRoles at: 2) ifAbsent: [ temp := 3 ] ] raise: NotFound.
 	self assert: temp = 3.
-	self shouldnt: [ samProfile removeRole: (self simpleRoles at: 2) ifAbsent: [  ] ] raise: NotFound
+	self shouldnt: [ rbacProfile removeRole: (self simpleRoles at: 2) ifAbsent: [  ] ] raise: NotFound
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACProfileTest >> testRoleAdditionAndRemotion [
 	"Test the addition and remotion of roles to the user."
 
-	| samProfile |
-	samProfile := self profile1.
-	samProfile addRole: (self simpleRoles at: 1).
-	self assert: samProfile roles = (Set with: (self simpleRoles at: 1)).
-	samProfile addRole: (self compositeRoles at: 1).
-	self assert: samProfile roles = (Set with: (self simpleRoles at: 1) with: (self compositeRoles at: 1)).
-	samProfile removeRole: (self simpleRoles at: 1).
-	self should: [ samProfile removeRole: (self simpleRoles at: 1) ] raise: NotFoundError.
-	self assert: samProfile roles = (Set with: (self compositeRoles at: 1)).
-	samProfile addRole: (self simpleRoles at: 2).
-	self assert: samProfile roles = (Set with: (self compositeRoles at: 1) with: (self simpleRoles at: 2)).
-	self should: [ samProfile removeRole: (self simpleRoles at: 3) ] raise: NotFoundError.
-	samProfile removeAllRoles.
-	self assert: samProfile roles isEmpty
+	| rbacProfile |
+	rbacProfile := self profile1.
+	rbacProfile addRole: (self simpleRoles at: 1).
+	self assert: rbacProfile roles equals: (Set with: (self simpleRoles at: 1)).
+	rbacProfile addRole: (self compositeRoles at: 1).
+	self assert: rbacProfile roles equals: (Set with: (self simpleRoles at: 1) with: (self compositeRoles at: 1)).
+	rbacProfile removeRole: (self simpleRoles at: 1).
+	self should: [ rbacProfile removeRole: (self simpleRoles at: 1) ] raise: NotFound.
+	self assert: rbacProfile roles equals: (Set with: (self compositeRoles at: 1)).
+	rbacProfile addRole: (self simpleRoles at: 2).
+	self assert: rbacProfile roles equals: (Set with: (self compositeRoles at: 1) with: (self simpleRoles at: 2)).
+	self should: [ rbacProfile removeRole: (self simpleRoles at: 3) ] raise: NotFound.
+	rbacProfile removeAllRoles.
+	self assert: rbacProfile roles isEmpty
 ]
 
-{ #category : 'unit tests' }
+{ #category : #'unit tests' }
 RBACProfileTest >> testRoles [
 	| profile |
 	profile := self users at: 1.

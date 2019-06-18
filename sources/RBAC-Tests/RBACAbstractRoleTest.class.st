@@ -1,20 +1,16 @@
-"
-
-"
 Class {
-	#name : 'RBACAbstractRoleTest',
-	#superclass : 'RBACTest',
-	#vw_namespace : 'Root',
+	#name : #RBACAbstractRoleTest,
+	#superclass : #RBACTest,
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : #'as yet unclassified' }
 RBACAbstractRoleTest class >> isAbstract [
 
 	^self name = #RBACAbstractRoleTest
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> addRoles [
 	(self compositeRoles at: 1)
 		addRole: (self simpleRoles at: 1);
@@ -27,12 +23,12 @@ RBACAbstractRoleTest >> addRoles [
 		addRole: (self simpleRoles at: 4)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> comparePermission: perm with: comparandPerm [
 	^(perm target = comparandPerm target) & (perm bits = comparandPerm bits)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> crudPermissionsEqualityBetween: aCollection and: anotherCollection [ 
 
 	"Private - Answer true if aCollection is equal to anotherCollection."
@@ -48,7 +44,7 @@ RBACAbstractRoleTest >> crudPermissionsEqualityBetween: aCollection and: another
 	^true
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> equalityBetween: aCollection and: anotherCollection [
 	aCollection size = anotherCollection size
 		ifFalse: [ ^ false ].
@@ -59,7 +55,7 @@ RBACAbstractRoleTest >> equalityBetween: aCollection and: anotherCollection [
 	^ true
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> systemPermissionEqualityBetween: aSystemPermission and: anotherSystemPermission [ 
 
 	"Private - Answer true if aSystemPermission is equal to anotherSystemPermission."
@@ -71,7 +67,7 @@ RBACAbstractRoleTest >> systemPermissionEqualityBetween: aSystemPermission and: 
 		& (aSystemPermission operation = anotherSystemPermission operation)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> systemPermissionsEqualityBetween: aCollection and: anotherCollection [ 
 
 	"Private - Answer true if aCollection is equal to anotherCollection."
@@ -85,7 +81,7 @@ RBACAbstractRoleTest >> systemPermissionsEqualityBetween: aCollection and: anoth
 	^true
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testAllSubroles [
 
 	"Test the allSubroles method."
@@ -133,7 +129,7 @@ RBACAbstractRoleTest >> testAllSubroles [
 						yourself))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testAllSubrolesDo [
 	| result |
 	self addRoles.
@@ -163,7 +159,7 @@ RBACAbstractRoleTest >> testAllSubrolesDo [
 	self deny: result
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testCRUDPermissionTransitivity [
 	| role perm target |
 	target := RBACNamedModel new.
@@ -175,7 +171,7 @@ RBACAbstractRoleTest >> testCRUDPermissionTransitivity [
 	self assert: ((self compositeRoles at: 1) permissionFor: target) allowsUpdate
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testDescription [
 	"Test the description and description: methods."
 
@@ -188,7 +184,7 @@ RBACAbstractRoleTest >> testDescription [
 	self assert: compositeRole description = 'This is another role'
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testEquals [
 
 	"Test the equals: method."
@@ -228,7 +224,7 @@ RBACAbstractRoleTest >> testEquals [
 	self deny: ((self simpleRoles at: 4) equals: (self simpleRoles at: 1))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testIncludesRole [
 	self addRoles.
 	self assert: ((self compositeRoles at: 1) containsRole: (self simpleRoles at: 1)).
@@ -265,7 +261,7 @@ RBACAbstractRoleTest >> testIncludesRole [
 	self deny: ((self compositeRoles at: 4) containsRole: (self simpleRoles at: 1))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testIncludesSystemPermissionFor [
 	"Test the includesSystemPermissionFor: method."
 
@@ -309,7 +305,7 @@ RBACAbstractRoleTest >> testIncludesSystemPermissionFor [
 		assert: ((self compositeRoles at: 4) hasPermissionFor: (self operations at: 2))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testIsComposite [
 
 	"Test the isComposite method."
@@ -333,7 +329,7 @@ RBACAbstractRoleTest >> testIsComposite [
 	self deny: (self simpleRoles at: 4) isComposite
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testRecursiveRoleAdditionValidation [
 
 	(self compositeRoles at: 1)
@@ -361,7 +357,7 @@ RBACAbstractRoleTest >> testRecursiveRoleAdditionValidation [
 		raise: RBACRoleAlreadyAssigned
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testSystemPermissionAddition [
 	| role |
 	(role := self simpleRoles at: 1) addPermissionFor: (self operations at: 1).
@@ -370,7 +366,7 @@ RBACAbstractRoleTest >> testSystemPermissionAddition [
 	self assert: ((self compositeRoles at: 1) canExecute: self operations first)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRoleTest >> testWithAllSubroles [
 
 	"Test the withAllSubroles method."

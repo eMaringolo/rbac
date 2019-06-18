@@ -1,9 +1,5 @@
-"
-
-"
 Class {
-	#name : 'RBACRoleError',
-	#superclass : 'RBACError',
-	#vw_namespace : 'Root',
+	#name : #RBACRoleError,
+	#superclass : #RBACError,
 	#category : 'RBAC-Core'
 }

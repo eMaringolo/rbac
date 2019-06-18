@@ -1,9 +1,5 @@
-"
-
-"
 Class {
-	#name : 'RBACRoleRecursion',
-	#superclass : 'RBACRoleError',
-	#vw_namespace : 'Root',
+	#name : #RBACRoleRecursion,
+	#superclass : #RBACRoleError,
 	#category : 'RBAC-Core'
 }

@@ -2,46 +2,45 @@
 I represent a group  in the framework, I can contain users and have different roles.
 "
 Class {
-	#name : 'RBACGroup',
-	#superclass : 'RBACProfile',
+	#name : #RBACGroup,
+	#superclass : #RBACProfile,
 	#instVars : [
 		'members'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACGroup class >> displayName [
 
 	^'Groups'
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACGroup >> addMember: aRBACUser [
 	self members add: aRBACUser.
 	aRBACUser onAddedToGroup: self
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACGroup >> includesMember: aRBACProfile [
 	"Answer whether receiver includes aRBACProfile as one of its members."
 
 	^ self members anySatisfy: [ :one | one = aRBACProfile ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 RBACGroup >> initializeMembers [
 	members := Set new
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 RBACGroup >> isGroup [
 
 	^true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACGroup >> members [
 	"Answer the value of the receiver's ''members'' instance variable."
 
@@ -49,20 +48,20 @@ RBACGroup >> members [
 	^members
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACGroup >> members: anObject [
 	"Private - Set the value of the receiver's ''members'' instance variable to the argument, anObject."
 
 	members := anObject
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACGroup >> removeAllMembers [
 	self members copy
 		do: [ :each | self removeMember: each ]
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACGroup >> removeMember: aRBACUser [ 
 	"Adds aRBACProfile to the receiver members."
 

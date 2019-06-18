@@ -1,9 +1,5 @@
-"
-
-"
 Class {
-	#name : 'RBACDeletionDenied',
-	#superclass : 'RBACActionDenied',
-	#vw_namespace : 'Root',
+	#name : #RBACDeletionDenied,
+	#superclass : #RBACActionDenied,
 	#category : 'RBAC-Core'
 }

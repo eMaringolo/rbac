@@ -1,14 +1,10 @@
-"
-
-"
 Class {
-	#name : 'RBACCompositeRoleTest',
-	#superclass : 'RBACAbstractRoleTest',
-	#vw_namespace : 'Root',
+	#name : #RBACCompositeRoleTest,
+	#superclass : #RBACAbstractRoleTest,
 	#category : 'RBAC-Tests'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> hasTheSameCRUDPermissions: aCollection than: anotherCollection [ 
 
 	"Private - Answer true if aCollection has the same CRUDPermissions than anotherCollection not necessarily at the same order."
@@ -22,7 +18,7 @@ RBACCompositeRoleTest >> hasTheSameCRUDPermissions: aCollection than: anotherCol
 	^true
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> isIncluded: aCRUDPermission in: aCollection [ 
 
 	"Private - Answer true if aCRUDPermission is included in aCollection."
@@ -32,7 +28,7 @@ RBACCompositeRoleTest >> isIncluded: aCRUDPermission in: aCollection [
 	^(aCollection detect: [:one | self comparePermission: one with: aCRUDPermission] ifNone: []) notNil
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> orderByRoleAndOperation: aCollection [ 
 
 	"Private - Order aCollection (that contains system permissions) by role and then by operation."
@@ -46,12 +42,12 @@ RBACCompositeRoleTest >> orderByRoleAndOperation: aCollection [
 			a role id < b role id | (a role id = b role id & (a operation id < b operation id))]
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testAllSubrolesDo [
 	super testAllSubrolesDo
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testCanExecute [
 	| role role2 role3 compositeRole |
 	role := RBACRole new.
@@ -70,7 +66,7 @@ RBACCompositeRoleTest >> testCanExecute [
 	self deny: (compositeRole canExecute: (self operations at: 4))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testPermissions [
 	| sysop sysop2 sysop3 sysop4 sysop5 sysop6 sysop7 |
 	self addRoles.
@@ -115,7 +111,7 @@ RBACCompositeRoleTest >> testPermissions [
 	self assert: (self equalityBetween: (self compositeRoles at: 4) permissions and: (Set with: sysop5 with: sysop6 with: sysop7))
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testRemoveRoles [
 	self addRoles.
 	(self compositeRoles at: 1) removeAllSubroles.
@@ -136,7 +132,7 @@ RBACCompositeRoleTest >> testRemoveRoles [
 	self assert: (self compositeRoles at: 4) subroles isEmpty
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testSubroles [
 	self addRoles.
 	self
@@ -163,7 +159,7 @@ RBACCompositeRoleTest >> testSubroles [
 	self assert: (self equalityBetween: (self compositeRoles at: 4) subroles and: Set new)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACCompositeRoleTest >> testvalidateRoleAddition [
 
 	"Test the validateRoleAddition: method."

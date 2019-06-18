@@ -4,29 +4,28 @@ I'm an an abstract role and the central actor in this framework.
 
 "
 Class {
-	#name : 'RBACAbstractRole',
-	#superclass : 'RBACNamedModel',
+	#name : #RBACAbstractRole,
+	#superclass : #RBACNamedModel,
 	#instVars : [
 		'profiles'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Core'
 }
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole class >> isAbstract [
 	"Answer whether the receiver is an Abstract class."
 	
 	^self == RBACAbstractRole
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole class >> prefixLength [ 
 
 	^4
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACAbstractRole >> addProfile: aRBACProfile [
 
 	(self hasProfile: aRBACProfile) ifFalse: [ 
@@ -34,7 +33,7 @@ RBACAbstractRole >> addProfile: aRBACProfile [
 		aRBACProfile onAddedToRole: self]
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> allSubroles [
 	"Answer a collection of the receiver's subroles in 
 	breadth-first order, with the immediate children first. 
@@ -47,17 +46,17 @@ RBACAbstractRole >> allSubroles [
 	^answer
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> allSubrolesDo: aBlock [
 	self subclassResponsibility
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> canExecute: aRBACSystemOperation [
 	self subclassResponsibility
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> containsRole: aRole [
 	"Answer true if the receiver or any of all its subroles includes aRole.
 	The receiver isn't composite so it hasn't any subrole."
@@ -65,12 +64,12 @@ RBACAbstractRole >> containsRole: aRole [
 	self subclassResponsibility
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> equals: anObject [
 	^ self = anObject
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> hasPermissionFor: target [
 	| testBlock |
 	testBlock := [ :each | 
@@ -81,46 +80,46 @@ RBACAbstractRole >> hasPermissionFor: target [
 	^ false
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACAbstractRole >> hasProfile: aRBACProfile [ 
 	
 	^(self profiles includes: aRBACProfile)
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> isComposite [
 	 "Answer whether receiver is composite."
 	
 	^false
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACAbstractRole >> onRemovedFromProfile: aRBACProfile [
 	
 	self profiles remove: aRBACProfile
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> permissionFor: anObject [
 	"Answer the crud permission for anObject."
 	
 	^self subclassResponsibility
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> permissions [
 	"Answer the CRUD permissions of the receiver."
 	
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 RBACAbstractRole >> profiles [
 	profiles ifNil: [ profiles := Set new ].
 	^ profiles
 ]
 
-{ #category : 'permissions' }
+{ #category : #permissions }
 RBACAbstractRole >> removePermissionFor: target [
 	| perm |
 	(perm := self permissionFor: target) isTransient
@@ -128,14 +127,14 @@ RBACAbstractRole >> removePermissionFor: target [
 	^ perm
 ]
 
-{ #category : 'members' }
+{ #category : #members }
 RBACAbstractRole >> removeProfile: aRBACProfile [
 	
 	self profiles remove: aRBACProfile.
 	aRBACProfile onRemovedFromRole: self
 ]
 
-{ #category : 'uncategorized' }
+{ #category : #uncategorized }
 RBACAbstractRole >> withAllSubroles [
 	"Answer a <collection> with the receiver and its subroles in 
 	breadth-first order, with the immediate children first. 

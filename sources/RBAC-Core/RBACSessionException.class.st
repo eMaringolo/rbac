@@ -1,9 +1,5 @@
-"
-
-"
 Class {
-	#name : 'RBACSessionException',
-	#superclass : 'RBACException',
-	#vw_namespace : 'Root',
+	#name : #RBACSessionException,
+	#superclass : #RBACException,
 	#category : 'RBAC-Core'
 }

@@ -1,9 +1,5 @@
-"
-
-"
 Class {
-	#name : 'RBACException',
-	#superclass : 'GRNotification',
-	#vw_namespace : 'Root',
+	#name : #RBACException,
+	#superclass : #GRNotification,
 	#category : 'RBAC-Core'
 }
