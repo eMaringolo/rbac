@@ -4,19 +4,18 @@ I'm the GLORP descriptor system for all RBAC classes
 
 "
 Class {
-	#name : 'RBACDescriptorSystem',
-	#superclass : 'DescriptorSystem',
-	#vw_namespace : 'Root',
+	#name : #RBACDescriptorSystem,
+	#superclass : #DescriptorSystem,
 	#category : 'RBAC-Glorp'
 }
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addDatedModelAttributesTo: aClassModel entityClass: aClass [
 	
 	self addDatedModelAttributesTo: aClassModel entityClass: aClass usesTime: aClassModel describedClass usesDateAndTime
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addDatedModelAttributesTo: aClassModel entityClass: aClass usesTime: usesTime [
 	self addIdAttributeTo: aClassModel.
 	aClassModel newAttributeNamed: #businessDate.
@@ -25,19 +24,19 @@ RBACDescriptorSystem >> addDatedModelAttributesTo: aClassModel entityClass: aCla
 	aClassModel newAttributeNamed: #comments.
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addDatedModelFieldsTo: aTable entityTable: entityTable [
 
 	self addDatedModelFieldsTo: aTable entityTable: entityTable usesTime: false
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addDatedModelFieldsTo: aTable entityTable: entityTable usesTime: usesTime [
 
 	self addDatedModelFieldsTo: aTable entityTable: entityTable usesTime: usesTime usesComments: false
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addDatedModelFieldsTo: aTable entityTable: entityTable usesTime: usesTime usesComments: usesComments [
 	| entityId |
 	entityId := aTable createFieldNamed: 'entity_id' type: platform integer.
@@ -51,7 +50,7 @@ RBACDescriptorSystem >> addDatedModelFieldsTo: aTable entityTable: entityTable u
 	]
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table [
 	self
 		addDatedModelMappingsTo: aDescriptor
@@ -61,7 +60,7 @@ RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table [
 		usesComments: false
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table entityTable: entityTable usesTime: usesTime usesComments: usesComments [
 	| entityMapping  |
 	self addIdMappingTo: aDescriptor table: table.
@@ -77,7 +76,7 @@ RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table entity
 		(aDescriptor newMapping: DirectMapping) from: #comments to: (table fieldNamed: 'comments') ]
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table usesTime: aBoolean [
 	self
 		addDatedModelMappingsTo: aDescriptor
@@ -87,29 +86,29 @@ RBACDescriptorSystem >> addDatedModelMappingsTo: aDescriptor table: table usesTi
 		usesComments: false
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addIdAttributeTo: aClassModel [
 	aClassModel newAttributeNamed: #id
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addIdFieldTo: aTable [
 	(aTable createFieldNamed: 'id' type: platform sequence) bePrimaryKey
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addIdMappingTo: aDescriptor table: table [
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id')
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addModelPartFieldsTo: aTable ownerTable: ownerTable [
 	| ownerId |
 	ownerId := aTable createFieldNamed: 'owner_id' type: platform integer.
 	aTable addForeignKeyFrom: ownerId to: (ownerTable fieldNamed: 'id')
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addModelPartMappingsTo: aDescriptor table: table ownerClass: aClass [
 	self addIdMappingTo: aDescriptor table: table.
 	(aDescriptor newMapping: OneToOneMapping )
@@ -117,46 +116,46 @@ RBACDescriptorSystem >> addModelPartMappingsTo: aDescriptor table: table ownerCl
 		referenceClass: aClass
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addNameAttributeTo: aClassModel [
 	aClassModel newAttributeNamed: #name
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addNameFieldTo: aTable [
 	aTable createFieldNamed: 'name' type: (platform varChar: 100)
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addNameMappingTo: aDescriptor table: table [
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name')
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addNamedModelAttributesTo: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	self addNameAttributeTo: aClassModel
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addNamedModelMappingsTo: aDescriptor table: table [
 	self addIdMappingTo: aDescriptor table: table.
 	self addNameMappingTo: aDescriptor table: table
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addTableFieldsForNamedModel: aTable [
 	self addIdFieldTo: aTable.
 	self addNameFieldTo: aTable
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addUserAttributeTo: aClassModel [
 
 	aClassModel newAttributeNamed: #user type: RBACUser
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addUserFieldTo: aTable [
 
 	| userId |
@@ -164,27 +163,27 @@ RBACDescriptorSystem >> addUserFieldTo: aTable [
 	aTable addForeignKeyFrom: userId to: ((self tableNamed: 'RBSUSER') fieldNamed: 'id')
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addUserMappingTo: aDescriptor [
 
 	(aDescriptor newMapping: OneToOneMapping ) attributeName: #user; referenceClass: RBACUser
 ]
 
-{ #category : 'models-convenience' }
+{ #category : #'models-convenience' }
 RBACDescriptorSystem >> addVersioningAttributesTo: aClassModel [
 
 	aClassModel newAttributeNamed: #creationTs.
 	aClassModel newAttributeNamed: #modificationTs
 ]
 
-{ #category : 'tables-convenience' }
+{ #category : #'tables-convenience' }
 RBACDescriptorSystem >> addVersioningFieldsTo: aTable [
 
 	aTable createFieldNamed: 'created_at' type: ((platform versionFieldFor: platform timestamp) generatesOverExistingValues: false).
 	aTable createFieldNamed: 'modified_at' type: (platform versionFieldFor: platform timestamp) generateOverExistingValues.
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> addVersioningMappingsTo: aDescriptor table: table [
 
 	(aDescriptor newMapping: DirectMapping) from: #creationTs
@@ -193,7 +192,7 @@ RBACDescriptorSystem >> addVersioningMappingsTo: aDescriptor table: table [
 		to: (table fieldNamed: 'modified_at')
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACGroup: aClassModel [
 
 	self addNamedModelAttributesTo: aClassModel.
@@ -202,7 +201,7 @@ RBACDescriptorSystem >> classModelForRBACGroup: aClassModel [
 	self addVersioningAttributesTo: aClassModel
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACMenu: aClassModel [
 	self addNamedModelAttributesTo: aClassModel.
 	aClassModel newAttributeNamed: #subjectType.	
@@ -216,7 +215,7 @@ RBACDescriptorSystem >> classModelForRBACMenu: aClassModel [
 	aClassModel newAttributeNamed: #children collectionOf: RBACMenu.
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACOperation: aClassModel [
 	self addNamedModelAttributesTo: aClassModel.
 	aClassModel newAttributeNamed: #subjectType.
@@ -224,7 +223,7 @@ RBACDescriptorSystem >> classModelForRBACOperation: aClassModel [
 	aClassModel newAttributeNamed: #description.
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACPermission: aClassModel [
 
 	aClassModel newAttributeNamed: #id.
@@ -233,7 +232,7 @@ RBACDescriptorSystem >> classModelForRBACPermission: aClassModel [
 	aClassModel newAttributeNamed: #target type: RBACPermissionSubject.
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACProfilePreference: aClassModel [
 
 	aClassModel newAttributeNamed: #owner type: RBACProfile.
@@ -242,14 +241,14 @@ RBACDescriptorSystem >> classModelForRBACProfilePreference: aClassModel [
 	aClassModel newAttributeNamed: #value.
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACRole: aClassModel [
 	self addNamedModelAttributesTo: aClassModel.
 	 aClassModel newAttributeNamed: #users collectionOf: RBACUser.
 	 aClassModel newAttributeNamed: #permissions collectionOf: RBACPermission.
 ]
 
-{ #category : 'models' }
+{ #category : #models }
 RBACDescriptorSystem >> classModelForRBACUser: aClassModel [
 
 	self addNamedModelAttributesTo: aClassModel.
@@ -264,7 +263,7 @@ RBACDescriptorSystem >> classModelForRBACUser: aClassModel [
 	self addVersioningAttributesTo: aClassModel
 ]
 
-{ #category : 'converters' }
+{ #category : #converters }
 RBACDescriptorSystem >> classToStringConverter [
 
 	^PluggableDatabaseConverter new
@@ -273,7 +272,7 @@ RBACDescriptorSystem >> classToStringConverter [
 		yourself
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> configureRBACPermissionSubjectDescriptor: aDescriptor [
 
 	| table|
@@ -289,7 +288,7 @@ RBACDescriptorSystem >> configureRBACPermissionSubjectDescriptor: aDescriptor [
 	self addVersioningMappingsTo: aDescriptor table: aDescriptor table
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> configureRBACProfileDescriptor: aDescriptor [
 
 	| rolesLinkTable table |
@@ -310,7 +309,7 @@ RBACDescriptorSystem >> configureRBACProfileDescriptor: aDescriptor [
 	self addVersioningMappingsTo: aDescriptor table: aDescriptor table
 ]
 
-{ #category : 'mappings-convenience' }
+{ #category : #'mappings-convenience' }
 RBACDescriptorSystem >> configureTsPersonaDescriptor: aDescriptor [
 	| table |
 	table := self tableNamed: 'PERSONA'.
@@ -326,7 +325,7 @@ RBACDescriptorSystem >> configureTsPersonaDescriptor: aDescriptor [
 	(aDescriptor newMapping: DirectMapping) from: #comments to:  (table fieldNamed: 'comments').
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACGroup: aDescriptor [
 
 	| table membersLinkTable |
@@ -346,7 +345,7 @@ RBACDescriptorSystem >> descriptorForRBACGroup: aDescriptor [
 					to: (membersLinkTable fieldNamed: 'group_id'))
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACMenu: aDescriptor [
 
 	| table parentTable childrenTable |
@@ -375,7 +374,7 @@ RBACDescriptorSystem >> descriptorForRBACMenu: aDescriptor [
 		to: (table fieldNamed: 'icon').
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACOperation: aDescriptor [
 
 	| table |
@@ -388,7 +387,7 @@ RBACDescriptorSystem >> descriptorForRBACOperation: aDescriptor [
 	self configureRBACPermissionSubjectDescriptor: aDescriptor
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACPermission: aDescriptor [
 	| table |
 	table := self tableNamed: 'RBACPERMISSION'.
@@ -400,7 +399,7 @@ RBACDescriptorSystem >> descriptorForRBACPermission: aDescriptor [
 		referenceClass: RBACPermissionSubject.
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACPermissionSubject: aDescriptor [
 
 	| table |
@@ -410,7 +409,7 @@ RBACDescriptorSystem >> descriptorForRBACPermissionSubject: aDescriptor [
 	self configureRBACPermissionSubjectDescriptor: aDescriptor
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACProfile: aDescriptor [
 
 	| table |
@@ -420,7 +419,7 @@ RBACDescriptorSystem >> descriptorForRBACProfile: aDescriptor [
 	self configureRBACProfileDescriptor: aDescriptor
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACProfilePreference: aDescriptor [
 	| table |
 	table := self tableNamed: 'RBACPROFILEPREFERENCE'.
@@ -433,7 +432,7 @@ RBACDescriptorSystem >> descriptorForRBACProfilePreference: aDescriptor [
 	(aDescriptor newMapping: DirectMapping) from: #value to: (table fieldNamed: 'value').
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACRole: aDescriptor [
 	| table |
 	table := self tableNamed: 'RBACROLE'.
@@ -445,7 +444,7 @@ RBACDescriptorSystem >> descriptorForRBACRole: aDescriptor [
 		beExclusive
 ]
 
-{ #category : 'mappings' }
+{ #category : #mappings }
 RBACDescriptorSystem >> descriptorForRBACUser: aDescriptor [
 	| table |
 	table := self tableNamed: 'RBACPROFILE'.
@@ -466,7 +465,7 @@ RBACDescriptorSystem >> descriptorForRBACUser: aDescriptor [
 		referenceClass: RBACProfilePreference
 ]
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACDescriptorSystem >> schemaScriptFor: classes [
 
 	| system |
@@ -520,7 +519,7 @@ RBACDescriptorSystem >> schemaScriptFor: classes [
 										cr]]]]
 ]
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACDescriptorSystem >> schemaStatementsFor: classes [
 
 	| system statements constraints relationTables |
@@ -556,7 +555,7 @@ RBACDescriptorSystem >> schemaStatementsFor: classes [
 	^statements reject: [:each | each trimBlanks isEmpty]
 ]
 
-{ #category : 'tables-relations' }
+{ #category : #'tables-relations' }
 RBACDescriptorSystem >> tableForRBACGROUP_ON_RBACUSER: aTable [
 
 	| userKey groupKey |
@@ -568,7 +567,7 @@ RBACDescriptorSystem >> tableForRBACGROUP_ON_RBACUSER: aTable [
 	aTable addForeignKeyFrom: userKey to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id').
 ]
 
-{ #category : 'tables' }
+{ #category : #tables }
 RBACDescriptorSystem >> tableForRBACPERMISSION: aTable [
 
 	| target_id |
@@ -581,7 +580,7 @@ RBACDescriptorSystem >> tableForRBACPERMISSION: aTable [
 	self addVersioningFieldsTo: aTable
 ]
 
-{ #category : 'tables' }
+{ #category : #tables }
 RBACDescriptorSystem >> tableForRBACPERMISSIONSUBJECT: aTable [
 
 	| parentId |
@@ -597,7 +596,7 @@ RBACDescriptorSystem >> tableForRBACPERMISSIONSUBJECT: aTable [
 	self addVersioningFieldsTo: aTable
 ]
 
-{ #category : 'tables' }
+{ #category : #tables }
 RBACDescriptorSystem >> tableForRBACPROFILE: aTable [
 	self addTableFieldsForNamedModel: aTable.
 	aTable createFieldNamed: 'profileType' type: ( platform varChar: 100 ).
@@ -610,7 +609,7 @@ RBACDescriptorSystem >> tableForRBACPROFILE: aTable [
 	self addVersioningFieldsTo: aTable
 ]
 
-{ #category : 'tables' }
+{ #category : #tables }
 RBACDescriptorSystem >> tableForRBACPROFILEPREFERENCE: aTable [
 
 	| ownerId ownerTable |
@@ -626,7 +625,7 @@ RBACDescriptorSystem >> tableForRBACPROFILEPREFERENCE: aTable [
 	self addVersioningFieldsTo: aTable
 ]
 
-{ #category : 'tables-relations' }
+{ #category : #'tables-relations' }
 RBACDescriptorSystem >> tableForRBACPROFILE_ON_RBACROLE: aTable [
 
 	| profileKey roleKey |
@@ -638,14 +637,14 @@ RBACDescriptorSystem >> tableForRBACPROFILE_ON_RBACROLE: aTable [
 	aTable addForeignKeyFrom: roleKey  to: ((self tableNamed: 'RBACROLE') fieldNamed: 'id').
 ]
 
-{ #category : 'tables' }
+{ #category : #tables }
 RBACDescriptorSystem >> tableForRBACROLE: aTable [
 
 	self addTableFieldsForNamedModel: aTable.
 	self addVersioningFieldsTo: aTable
 ]
 
-{ #category : 'tables-relations' }
+{ #category : #'tables-relations' }
 RBACDescriptorSystem >> tableForRBACROLE_ON_RBACPERMISSION: aTable [
 
 	| userKey menuKey |
@@ -657,19 +656,19 @@ RBACDescriptorSystem >> tableForRBACROLE_ON_RBACPERMISSION: aTable [
 	aTable addForeignKeyFrom: menuKey  to: ((self tableNamed: 'RBACPERMISSION') fieldNamed: 'id').
 ]
 
-{ #category : 'resolvers' }
+{ #category : #resolvers }
 RBACDescriptorSystem >> typeResolverForRBACPermissionSubject [
 
 	^FilteredTypeResolver forRootClass: RBACPermissionSubject
 ]
 
-{ #category : 'resolvers' }
+{ #category : #resolvers }
 RBACDescriptorSystem >> typeResolverForRBACProfile [
 
 	^FilteredTypeResolver forRootClass: RBACProfile
 ]
 
-{ #category : 'configuration' }
+{ #category : #configuration }
 RBACDescriptorSystem >> useDirectAccessForMapping [
 
 

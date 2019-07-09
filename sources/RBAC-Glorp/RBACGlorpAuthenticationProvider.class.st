@@ -3,22 +3,21 @@ RBACGlorpAuthenticationProvider is an RBAC authentication that uses Glorp mechan
 
 "
 Class {
-	#name : 'RBACGlorpAuthenticationProvider',
-	#superclass : 'RBACAuthenticationProvider',
+	#name : #RBACGlorpAuthenticationProvider,
+	#superclass : #RBACAuthenticationProvider,
 	#instVars : [
 		'session'
 	],
-	#vw_namespace : 'Root',
 	#category : 'RBAC-Glorp'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 RBACGlorpAuthenticationProvider class >> session: aGlorpSession [
 
 	^self new setSession: aGlorpSession
 ]
 
-{ #category : 'authentication' }
+{ #category : #authentication }
 RBACGlorpAuthenticationProvider >> authenticateUsername: userString password: passwordString [
 	"Authenthicates a username with uid userString and passwordString.
 	Answer true if authenticates successfully, otherwise answer false."
@@ -28,25 +27,24 @@ RBACGlorpAuthenticationProvider >> authenticateUsername: userString password: pa
 	^user notNil and: [(self preparePassword: passwordString salt: user passwordSalt) = user password]
 ]
 
-{ #category : 'passwords' }
+{ #category : #passwords }
 RBACGlorpAuthenticationProvider >> preparePassword: passwordString [
 
 	^self preparePassword: passwordString salt: String new
 ]
 
-{ #category : 'passwords' }
+{ #category : #passwords }
 RBACGlorpAuthenticationProvider >> preparePassword: passwordString salt: saltString [
-
-	^Base64FastCoder encodeAsBase64String: (GRPlatform current secureHashFor: (passwordString, saltString))
+	^ (PBKDF2 derivedKeySHA1Password: passwordString salt: saltString) base64Encoded 
 ]
 
-{ #category : 'authentication' }
+{ #category : #authentication }
 RBACGlorpAuthenticationProvider >> session [
 
 	^session
 ]
 
-{ #category : 'passwords' }
+{ #category : #passwords }
 RBACGlorpAuthenticationProvider >> setNewPassword: aString for: aRBACUser [ 
 	"Defines aString as the new password of aRBACUser."
 
@@ -54,7 +52,7 @@ RBACGlorpAuthenticationProvider >> setNewPassword: aString for: aRBACUser [
 	aRBACUser password: (self preparePassword: aString salt: aRBACUser passwordSalt)
 ]
 
-{ #category : 'authentication' }
+{ #category : #authentication }
 RBACGlorpAuthenticationProvider >> setSession: aGlorpSession [
 
 	session := aGlorpSession
