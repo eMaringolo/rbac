@@ -533,7 +533,7 @@ RBACDescriptorSystem >> schemaStatementsFor: classes [
 			[:class |
 			tables addAll: (system descriptorFor: class) tables.
 			((system descriptorFor: class) mappings contents
-				select: [:each | (each isKindOf: Glorp.RelationshipMapping) and: [each usesLinkTable]])
+				select: [:each | (each isKindOf: RelationshipMapping) and: [each usesLinkTable]])
 					do: [:each | relationTables addAll: each join allTables].
 			(system descriptorFor: class) tables do: 
 					[:table |
