@@ -25,7 +25,8 @@ BaselineOfRBAC >> baseline: spec [
 BaselineOfRBAC >> setUpDependencies: spec [
 	spec
 		baseline: 'Cryptography'
-			with: [ spec repository: 'github://pharo-contributions/Cryptography/source' ];
+			with:
+				[ spec repository: 'github://pharo-contributions/Cryptography/source' ];
 		baseline: 'Glorp'
-			with: [ spec repository: 'github://pavel-krivanek/glorp:8.3.1-23-baseline' ]
+			with: [ spec repository: 'github://pharo-rdbms/glorp' ]
 ]
