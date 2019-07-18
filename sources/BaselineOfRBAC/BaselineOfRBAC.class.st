@@ -13,7 +13,7 @@ BaselineOfRBAC >> baseline: spec [
 			spec
 				package: 'RBAC-Core' ;
 				package: 'RBAC-Tests' with: [ spec requires: #('RBAC-Core') ];
-				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core' 'PBKDF2') ];
+				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core' 'Cryptography') ];
 				package: 'RBAC-Glorp-Tests' with: [ spec requires: #('RBAC-Tests' 'RBAC-Glorp') ];
 				package: 'RBAC-Seaside' with: [ spec requires: #('RBAC-Core') ].
 			spec
