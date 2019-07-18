@@ -6,7 +6,7 @@ Class {
 		'session',
 		'databaseFilename'
 	],
-	#category : 'RBAC-Tests'
+	#category : #'RBAC-Glorp-Tests'
 }
 
 { #category : #'initialize-release' }
@@ -28,22 +28,29 @@ RBACGlorpPersistenceTest >> createDatabaseSchema [
 { #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> databaseFilename [
 
-	^databaseFilename ifNil: [databaseFilename := 'RBACTest', Timestamp now compressedDateTimeString, '.sqlite']
+	^databaseFilename ifNil: [databaseFilename := 'RBACTest', DateAndTime now asUnixTime asString, '.sqlite']
 ]
 
 { #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> ensureDatabaseDeletion [
-
-	(Filename named: self databaseFilename) deleteIfPossible
+	[ self databaseFilename asFileReference delete ]
+		on: CannotDeleteFileException , FileDoesNotExistException
+		do: [ :ex | 
+			Transcript
+				show:
+					'Cannot delete ' , self class name asString , ' database file '
+						, self databaseFile asString;
+				show: '. You will have to delete it manually.';
+				cr ]
 ]
 
 { #category : #'initialize-release' }
 RBACGlorpPersistenceTest >> setUp [
 
-	self ensureDatabaseDeletion.
 	login := (Login new)
 				database: SQLite3Platform new;
-				username: 'svx';
+				host: '';
+				username: 'rbac';
 				connectString: self databaseFilename.
 	session := RBACDescriptorSystem sessionForLogin: login.
 	session accessor login.

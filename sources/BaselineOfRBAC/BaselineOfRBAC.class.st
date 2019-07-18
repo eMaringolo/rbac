@@ -14,6 +14,7 @@ BaselineOfRBAC >> baseline: spec [
 				package: 'RBAC-Core' ;
 				package: 'RBAC-Tests' with: [ spec requires: #('RBAC-Core') ];
 				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core') ];
+				package: 'RBAC-Glorp-Tests' with: [ spec requires: #('RBAC-Tests' 'RBAC-Glorp') ];
 				package: 'RBAC-Seaside' with: [ spec requires: #('RBAC-Core') ].
 			spec
 				group: 'default' with: #('core' 'tests');
