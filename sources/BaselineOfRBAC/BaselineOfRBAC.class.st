@@ -13,7 +13,7 @@ BaselineOfRBAC >> baseline: spec [
 			spec
 				package: 'RBAC-Core' ;
 				package: 'RBAC-Tests' with: [ spec requires: #('RBAC-Core') ];
-				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core') ];
+				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core' 'PBKDF2') ];
 				package: 'RBAC-Glorp-Tests' with: [ spec requires: #('RBAC-Tests' 'RBAC-Glorp') ];
 				package: 'RBAC-Seaside' with: [ spec requires: #('RBAC-Core') ].
 			spec
@@ -30,7 +30,7 @@ BaselineOfRBAC >> setUpDependencies: spec [
 		baseline: 'Grease'
 			with: [ spec
 				loads: #('Grease-Core');
-				repository: 'github://SeasideSt/Grease:master/repository' ];
+				repository: 'github://SeasideSt/Grease:v1.4.x/repository' ];
 		baseline: 'Cryptography'
 			with: [ spec
 				loads: #('PBKDF2');
