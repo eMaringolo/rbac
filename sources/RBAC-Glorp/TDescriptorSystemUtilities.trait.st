@@ -82,7 +82,7 @@ TDescriptorSystemUtilities >> addDatedModelMappingsTo: aDescriptor table: table 
 
 { #category : #'models-convenience' }
 TDescriptorSystemUtilities >> addIdAttributeTo: aClassModel [
-	aClassModel newAttributeNamed: #id
+	(aClassModel newAttributeNamed: #id) useDirectAccess: true
 ]
 
 { #category : #'tables-convenience' }
@@ -127,7 +127,7 @@ TDescriptorSystemUtilities >> addNameMappingTo: aDescriptor table: table [
 
 { #category : #'models-convenience' }
 TDescriptorSystemUtilities >> addNamedModelAttributesTo: aClassModel [
-	aClassModel newAttributeNamed: #id.
+	self addIdAttributeTo: aClassModel.
 	self addNameAttributeTo: aClassModel
 ]
 
@@ -141,7 +141,8 @@ TDescriptorSystemUtilities >> addNamedModelMappingsTo: aDescriptor table: table 
 TDescriptorSystemUtilities >> addReferenceFieldNamed: aString to: aTable ownerTable: ownerTable [
 	| referenceId |
 	referenceId := aTable createFieldNamed: aString type: self platform integer.
-	aTable addForeignKeyFrom: referenceId to: (ownerTable fieldNamed: 'id')
+	aTable addForeignKeyFrom: referenceId to: (ownerTable fieldNamed: 'id').
+	^referenceId
 ]
 
 { #category : #'tables-convenience' }
