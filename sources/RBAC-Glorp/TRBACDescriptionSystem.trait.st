@@ -2,7 +2,7 @@ Trait {
 	#name : #TRBACDescriptionSystem,
 	#traits : 'TDescriptorSystemUtilities',
 	#classTraits : 'TDescriptorSystemUtilities classTrait',
-	#category : #'RBAC-Glorp'
+	#category : #'RBAC-Glorp-Core'
 }
 
 { #category : #'models-convenience' }

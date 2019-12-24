@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'session'
 	],
-	#category : 'RBAC-Glorp'
+	#category : #'RBAC-Glorp-Core'
 }
 
 { #category : #'instance creation' }

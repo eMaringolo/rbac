@@ -1,6 +1,6 @@
 Trait {
 	#name : #TDescriptorSystemUtilities,
-	#category : #'RBAC-Glorp'
+	#category : #'RBAC-Glorp-Core'
 }
 
 { #category : #'models-convenience' }

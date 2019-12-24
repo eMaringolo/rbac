@@ -8,5 +8,5 @@ Class {
 	#superclass : #DescriptorSystem,
 	#traits : 'TRBACDescriptionSystem',
 	#classTraits : 'TRBACDescriptionSystem classTrait',
-	#category : #'RBAC-Glorp'
+	#category : #'RBAC-Glorp-Core'
 }
