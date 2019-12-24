@@ -11,10 +11,12 @@ BaselineOfRBAC >> baseline: spec [
 		for: #common
 		do: [ self setUpDependencies: spec.
 			spec
-				package: 'RBAC-Core' ;
+				package: 'RBAC-Core' with: [ spec requires: #('Grease') ];
 				package: 'RBAC-Tests' with: [ spec requires: #('RBAC-Core') ];
-				package: 'RBAC-Glorp' with: [ spec requires: #('RBAC-Core' 'Cryptography') ];
-				package: 'RBAC-Glorp-Tests' with: [ spec requires: #('RBAC-Tests' 'RBAC-Glorp') ];
+				package: 'RBAC-Glorp'
+					with: [ spec requires: #('RBAC-Core' 'Cryptography') ];
+				package: 'RBAC-Glorp-Tests'
+					with: [ spec requires: #('RBAC-Tests' 'RBAC-Glorp') ];
 				package: 'RBAC-Seaside' with: [ spec requires: #('RBAC-Core') ].
 			spec
 				group: 'default' with: #('core' 'tests');
