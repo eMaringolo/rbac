@@ -15,7 +15,7 @@ TRBACDescriptionSystem >> addUserAttributeTo: aClassModel [
 TRBACDescriptionSystem >> addUserFieldTo: aTable [
 
 	| userId |
-	userId := aTable createFieldNamed: 'user_id' type: self platform integer.
+	userId := aTable createFieldNamed: 'user_id' type: self foreignKeyFieldType.
 	aTable addForeignKeyFrom: userId to: ((self tableNamed: 'RBACUSER') fieldNamed: 'id')
 ]
 
@@ -71,8 +71,11 @@ TRBACDescriptionSystem >> classModelForRBACProfilePreference: aClassModel [
 { #category : #models }
 TRBACDescriptionSystem >> classModelForRBACRole: aClassModel [
 	self addNamedModelAttributesTo: aClassModel.
-	 aClassModel newAttributeNamed: #users collectionOf: RBACUser.
-	 aClassModel newAttributeNamed: #permissions collectionOf: RBACPermission.
+	aClassModel newAttributeNamed: #tag.
+	aClassModel newAttributeNamed: #users collectionOf: RBACUser.
+	aClassModel
+		newAttributeNamed: #permissions
+		collectionOf: RBACPermission
 ]
 
 { #category : #models }
@@ -240,6 +243,9 @@ TRBACDescriptionSystem >> descriptorForRBACRole: aDescriptor [
 	table := self tableNamed: 'RBACROLE'.
 	aDescriptor table: table.
 	self addNamedModelMappingsTo: aDescriptor table: table.
+	(aDescriptor newMapping: DirectMapping)
+		from: #tag
+		to: (table fieldNamed: 'tag').
 	(aDescriptor newMapping: ToManyMapping)
 		attributeName: #permissions;
 		referenceClass: RBACPermission;
@@ -359,24 +365,35 @@ TRBACDescriptionSystem >> schemaStatementsFor: classes [
 
 { #category : #'tables-relations' }
 TRBACDescriptionSystem >> tableForRBACGROUP_ON_RBACUSER: aTable [
-
 	| userKey groupKey |
-	groupKey := aTable createFieldNamed: 'group_id' type: (self platform int4).
+	groupKey := aTable
+		createFieldNamed: 'group_id'
+		type: self foreignKeyFieldType.
 	groupKey bePrimaryKey.
-	aTable addForeignKeyFrom: groupKey  to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id').
-	userKey := aTable createFieldNamed: 'user_id' type: (self platform int4).
+	aTable
+		addForeignKeyFrom: groupKey
+		to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id').
+	userKey := aTable
+		createFieldNamed: 'user_id'
+		type: self foreignKeyFieldType.
 	userKey bePrimaryKey.
-	aTable addForeignKeyFrom: userKey to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id').
+	aTable
+		addForeignKeyFrom: userKey
+		to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id')
 ]
 
 { #category : #tables }
 TRBACDescriptionSystem >> tableForRBACPERMISSION: aTable [
-
 	| target_id |
 	self addIdFieldTo: aTable.
-	self addModelPartFieldsTo: aTable ownerTable: (self tableNamed: 'RBACROLE').
-	target_id := aTable createFieldNamed: 'target_id' type: self platform integer.
-	aTable addForeignKeyFrom: target_id
+	self
+		addModelPartFieldsTo: aTable
+		ownerTable: (self tableNamed: 'RBACROLE').
+	target_id := aTable
+		createFieldNamed: 'target_id'
+		type: self primaryKeyFieldType.
+	aTable
+		addForeignKeyFrom: target_id
 		to: ((self tableNamed: 'RBACPERMISSIONSUBJECT') fieldNamed: 'id').
 	aTable createFieldNamed: 'bits' type: self platform int8.
 	self addVersioningFieldsTo: aTable
@@ -384,15 +401,21 @@ TRBACDescriptionSystem >> tableForRBACPERMISSION: aTable [
 
 { #category : #tables }
 TRBACDescriptionSystem >> tableForRBACPERMISSIONSUBJECT: aTable [
-
 	| parentId |
 	self addTableFieldsForNamedModel: aTable.
-	parentId := aTable createFieldNamed: 'parent_id' type: self platform integer.
-	aTable createFieldNamed: 'subjectType' type: (self platform varChar: 100).
-	aTable addForeignKeyFrom: parentId
+	parentId := aTable
+		createFieldNamed: 'parent_id'
+		type: self primaryKeyFieldType.
+	aTable
+		createFieldNamed: 'subjectType'
+		type: (self platform varChar: 100).
+	aTable
+		addForeignKeyFrom: parentId
 		to: ((self tableNamed: 'RBACPERMISSIONSUBJECT') fieldNamed: 'id').
 	aTable createFieldNamed: 'tag' type: (self platform varchar: 50).
-	aTable createFieldNamed: 'description' type: (self platform varChar: 100).
+	aTable
+		createFieldNamed: 'description'
+		type: (self platform varChar: 100).
 	aTable createFieldNamed: 'icon' type: (self platform varchar: 50).
 	aTable createFieldNamed: 'priority' type: self platform integer.
 	self addVersioningFieldsTo: aTable
@@ -425,14 +448,15 @@ TRBACDescriptionSystem >> tableForRBACPROFILE: aTable [
 
 { #category : #tables }
 TRBACDescriptionSystem >> tableForRBACPROFILEPREFERENCE: aTable [
-
 	| ownerId ownerTable |
 	ownerTable := self tableNamed: 'RBACPROFILE'.
-	ownerId := (aTable createFieldNamed: 'owner_id' type: self platform integer)
-				bePrimaryKey.
+	ownerId := (aTable
+		createFieldNamed: 'owner_id'
+		type: self primaryKeyFieldType) bePrimaryKey.
 	aTable addForeignKeyFrom: ownerId to: (ownerTable fieldNamed: 'id').
-	(aTable createFieldNamed: 'section' type: (self platform varchar: 100))
-		bePrimaryKey.
+	(aTable
+		createFieldNamed: 'section'
+		type: (self platform varchar: 100)) bePrimaryKey.
 	(aTable createFieldNamed: 'name' type: (self platform varchar: 100))
 		bePrimaryKey.
 	aTable createFieldNamed: 'value' type: (self platform varchar: 1000).
@@ -443,31 +467,31 @@ TRBACDescriptionSystem >> tableForRBACPROFILEPREFERENCE: aTable [
 TRBACDescriptionSystem >> tableForRBACPROFILE_ON_RBACROLE: aTable [
 
 	| profileKey roleKey |
-	profileKey := aTable createFieldNamed: 'profile_id' type: (self platform int4).
+	profileKey := aTable createFieldNamed: 'profile_id' type: self foreignKeyFieldType.
 	profileKey bePrimaryKey.
 	aTable addForeignKeyFrom: profileKey to: ((self tableNamed: 'RBACPROFILE') fieldNamed: 'id').
-	roleKey := aTable createFieldNamed: 'role_id' type: (self platform int4).
+	roleKey := aTable createFieldNamed: 'role_id' type: self foreignKeyFieldType.
 	roleKey bePrimaryKey.
 	aTable addForeignKeyFrom: roleKey  to: ((self tableNamed: 'RBACROLE') fieldNamed: 'id').
 ]
 
 { #category : #tables }
 TRBACDescriptionSystem >> tableForRBACROLE: aTable [
-
 	self addTableFieldsForNamedModel: aTable.
+	aTable createFieldNamed: 'tag' type: (self platform varChar: 100).
 	self addVersioningFieldsTo: aTable
 ]
 
 { #category : #'tables-relations' }
 TRBACDescriptionSystem >> tableForRBACROLE_ON_RBACPERMISSION: aTable [
 
-	| userKey menuKey |
-	userKey := aTable createFieldNamed: 'role_id' type: (self platform int4).
+	| userKey permissionKey |
+	userKey := aTable createFieldNamed: 'role_id' type: self foreignKeyFieldType.
 	userKey bePrimaryKey.
 	aTable addForeignKeyFrom: userKey to: ((self tableNamed: 'RBACROLE') fieldNamed: 'id').
-	menuKey := aTable createFieldNamed: 'permission_id' type: (self platform int4).
-	menuKey bePrimaryKey.
-	aTable addForeignKeyFrom: menuKey  to: ((self tableNamed: 'RBACPERMISSION') fieldNamed: 'id').
+	permissionKey := aTable createFieldNamed: 'permission_id' type: self foreignKeyFieldType.
+	permissionKey bePrimaryKey.
+	aTable addForeignKeyFrom: permissionKey  to: ((self tableNamed: 'RBACPERMISSION') fieldNamed: 'id').
 ]
 
 { #category : #resolvers }

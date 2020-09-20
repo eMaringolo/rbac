@@ -7,9 +7,10 @@ Class {
 	#name : #RBACRole,
 	#superclass : #RBACAbstractRole,
 	#instVars : [
-		'permissions'
+		'permissions',
+		'tag'
 	],
-	#category : 'RBAC-Core'
+	#category : #'RBAC-Core'
 }
 
 { #category : #permissions }
@@ -39,6 +40,14 @@ RBACRole >> allSubrolesDo: aBlock [
 { #category : #private }
 RBACRole >> canExecute: anObject [
 	^ self permissions anySatisfy: [ :one | one target = anObject and: [ one allowsExecution ] ]
+]
+
+{ #category : #testing }
+RBACRole >> computeTag [
+	^ '.'
+		join:
+			((self name findTokens: Character separators)
+				collect: [ :each | each asLowercase ])
 ]
 
 { #category : #uncategorized }
@@ -115,6 +124,17 @@ RBACRole >> removePermission: aRBACCRUDPermission [
 RBACRole >> removeUser: aRBACUser [ 
 	
 	(self users includes: aRBACUser) ifTrue: [ self users remove: aRBACUser ]
+]
+
+{ #category : #testing }
+RBACRole >> tag [
+	^ tag ifNil:
+		[ tag := self computeTag ]
+]
+
+{ #category : #accessing }
+RBACRole >> tag: anObject [
+	tag := anObject
 ]
 
 { #category : #accessing }

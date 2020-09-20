@@ -10,8 +10,13 @@ Class {
 		'creationTs',
 		'modificationTs'
 	],
-	#category : 'RBAC-Core'
+	#category : #'RBAC-Core'
 }
+
+{ #category : #accessing }
+RBACObject class >> computeRandomId [
+	^UUID new asString36
+]
 
 { #category : #accessing }
 RBACObject >> creationTs [
@@ -28,7 +33,7 @@ RBACObject >> creationTs: anObject [
 { #category : #accessing }
 RBACObject >> id [
 
-	^id
+	^id ifNil: [ id := self class computeRandomId ]
 ]
 
 { #category : #accessing }

@@ -14,7 +14,7 @@ Class {
 		'passwordSalt',
 		'email'
 	],
-	#category : 'RBAC-Core'
+	#category : #'RBAC-Core'
 }
 
 { #category : #accessing }
@@ -110,7 +110,8 @@ RBACUser >> displayName [
 { #category : #accessing }
 RBACUser >> displayName: anObject [
 	"Set the value of the receiver's ''displayName'' instance variable to the argument, anObject."
-	( anObject notNil and: [ anObject trimBlanks isEmpty ] )
+
+	(anObject notNil and: [ anObject trim isEmpty ])
 		ifTrue: [ displayName := nil ]
 		ifFalse: [ displayName := anObject ]
 ]

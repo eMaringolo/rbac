@@ -87,7 +87,7 @@ TDescriptorSystemUtilities >> addIdAttributeTo: aClassModel [
 
 { #category : #'tables-convenience' }
 TDescriptorSystemUtilities >> addIdFieldTo: aTable [
-	(aTable createFieldNamed: 'id' type: self platform sequence) bePrimaryKey
+	(aTable createFieldNamed: 'id' type: self primaryKeyFieldType) bePrimaryKey
 ]
 
 { #category : #'mappings-convenience' }
@@ -98,7 +98,9 @@ TDescriptorSystemUtilities >> addIdMappingTo: aDescriptor table: table [
 { #category : #'tables-convenience' }
 TDescriptorSystemUtilities >> addModelPartFieldsTo: aTable ownerTable: ownerTable [
 	| ownerId |
-	ownerId := aTable createFieldNamed: 'owner_id' type: self platform integer.
+	ownerId := aTable
+		createFieldNamed: 'owner_id'
+		type: self primaryKeyFieldType.
 	aTable addForeignKeyFrom: ownerId to: (ownerTable fieldNamed: 'id')
 ]
 
@@ -140,9 +142,13 @@ TDescriptorSystemUtilities >> addNamedModelMappingsTo: aDescriptor table: table 
 { #category : #'tables-convenience' }
 TDescriptorSystemUtilities >> addReferenceFieldNamed: aString to: aTable ownerTable: ownerTable [
 	| referenceId |
-	referenceId := aTable createFieldNamed: aString type: self platform integer.
-	aTable addForeignKeyFrom: referenceId to: (ownerTable fieldNamed: 'id').
-	^referenceId
+	referenceId := aTable
+		createFieldNamed: aString
+		type: self foreignKeyFieldType.
+	aTable
+		addForeignKeyFrom: referenceId
+		to: (ownerTable fieldNamed: 'id').
+	^ referenceId
 ]
 
 { #category : #'tables-convenience' }
@@ -203,4 +209,14 @@ TDescriptorSystemUtilities >> configureTsPersonaDescriptor: aDescriptor [
 	(aDescriptor newMapping: DirectMapping) from: #email to:  (table fieldNamed: 'email').			
 	(aDescriptor newMapping: DirectMapping) from: #email2 to:  (table fieldNamed: 'email2').
 	(aDescriptor newMapping: DirectMapping) from: #comments to:  (table fieldNamed: 'comments').
+]
+
+{ #category : #configuring }
+TDescriptorSystemUtilities >> foreignKeyFieldType [
+	^ self platform integer
+]
+
+{ #category : #configuring }
+TDescriptorSystemUtilities >> primaryKeyFieldType [
+	^ self platform sequence
 ]

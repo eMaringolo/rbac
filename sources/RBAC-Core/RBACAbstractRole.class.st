@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'profiles'
 	],
-	#category : 'RBAC-Core'
+	#category : #'RBAC-Core'
 }
 
 { #category : #uncategorized }
@@ -84,6 +84,13 @@ RBACAbstractRole >> hasPermissionFor: target [
 RBACAbstractRole >> hasProfile: aRBACProfile [ 
 	
 	^(self profiles includes: aRBACProfile)
+]
+
+{ #category : #members }
+RBACAbstractRole >> initialize [ 
+
+	super initialize.
+	profiles := Set new
 ]
 
 { #category : #uncategorized }
