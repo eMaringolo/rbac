@@ -32,7 +32,7 @@ BaselineOfRBAC >> setUpDependencies: spec [
 		baseline: 'Grease'
 			with: [ spec
 				loads: #('Grease-Core');
-				repository: 'github://SeasideSt/Grease:master/repository' ];
+				repository: 'github://SeasideSt/Grease:v1.6.x/repository' ];
 		baseline: 'Cryptography'
 			with: [ spec
 				loads: #('PBKDF2');
