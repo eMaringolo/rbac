@@ -32,15 +32,15 @@ BaselineOfRBAC >> setUpDependencies: spec [
 		baseline: 'Grease'
 			with: [ spec
 				loads: #('Grease-Core');
-				repository: 'github://SeasideSt/Grease:v1.6.x/repository' ];
+				repository: 'github://SeasideSt/Grease:master/repository' ];
 		baseline: 'Cryptography'
 			with: [ spec
 				loads: #('PBKDF2');
-				repository: 'github://pharo-contributions/Cryptography/source' ];
+				repository: 'github://eMaringolo/Cryptography/source' ];
 		baseline: 'Seaside3'
 			with: [ spec
 				loads: #('default');
 				repository: 'github://SeasideSt/Seaside:master/repository' ];
 		baseline: 'Glorp'
-			with: [ spec repository: 'github://pharo-rdbms/glorp' ]
+			with: [ spec repository: 'github://pharo-rdbms/glorp/src' ]
 ]
