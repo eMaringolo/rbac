@@ -330,37 +330,45 @@ TRBACDescriptionSystem >> schemaScriptFor: classes [
 { #category : #configuration }
 TRBACDescriptionSystem >> schemaStatementsFor: classes [
 
+	^self schemaStatementsFor: classes dropTables: true
+]
+
+{ #category : #configuration }
+TRBACDescriptionSystem >> schemaStatementsFor: classes dropTables: aBoolean [
+
 	| system statements constraints relationTables tables |
 	system := self.
 	statements := OrderedCollection new.
 	tables := Set new.
 	relationTables := Set new.
 	constraints := Set new.
-	classes do: 
-			[:class |
-			tables addAll: (system descriptorFor: class) tables.
-			((system descriptorFor: class) mappings contents
-				select: [:each | (each isKindOf: RelationshipMapping) and: [each usesLinkTable]])
-					do: [:each | relationTables addAll: each join allTables].
-			(system descriptorFor: class) tables do: 
-					[:table |
-					table foreignKeyConstraintsForCreation
-						do: [:constraint | constraints add: constraint]]].
-	tables asArray, relationTables asArray do: 
-			[:table |
-			statements add: (system platform createTableStatementStringFor: table).
-			table indexes do: 
-					[:index |
-					statements
-						add: (system platform createTableIndexStatementStringFor: table index: index)].
-			system platform areSequencesExplicitlyCreated
-				ifTrue: 
-					[(system allSequencesFor: (Array with: table))
-						do: [:sequence | statements add: sequence creationString]]].
-	constraints do: 
-			[:constraint |
-			statements add: (system platform createConstraintAddStatement: constraint)].
-	^statements reject: [:each | each trimBoth isEmpty]
+	classes do: [ :class |
+		tables addAll: (system descriptorFor: class) tables.
+		((system descriptorFor: class) mappings contents select: [ :each |
+			 (each isKindOf: RelationshipMapping) and: [ each usesLinkTable ] ])
+			do: [ :each | relationTables addAll: each join allTables ].
+		(system descriptorFor: class) tables do: [ :table |
+			table foreignKeyConstraintsForCreation do: [ :constraint |
+				constraints add: constraint ] ].
+		relationTables do: [ :table |
+			table foreignKeyConstraintsForCreation do: [ :constraint |
+				constraints add: constraint ] ] ].
+	tables asArray , relationTables asArray do: [ :table |
+		aBoolean ifTrue: [
+			statements add: 'DROP TABLE IF EXISTS ' , table name ].
+		statements add:
+			(system platform createTableStatementStringFor: table).
+		table indexes do: [ :index |
+			statements add: (system platform
+					 createTableIndexStatementStringFor: table
+					 index: index) ].
+		system platform areSequencesExplicitlyCreated ifTrue: [
+			(system allSequencesFor: (Array with: table)) do: [ :sequence |
+				statements add: sequence creationString ] ] ].
+	constraints do: [ :constraint |
+		statements add:
+			(system platform createConstraintAddStatement: constraint) ].
+	^ statements reject: [ :each | each trimBoth isEmpty ]
 ]
 
 { #category : #'tables-relations' }
